@@ -7,15 +7,17 @@
 
 # use extended color palette if available
 if (( terminfo[colors] >= 256 )); then
-  if (( ! ${+USER_COLOR} )) typeset -g USER_COLOR=135
+  if (( ! ${+APPLE_COLOR} )) typeset -g APPLE_COLOR=15
+  if (( ! ${+USER_COLOR} )) typeset -g USER_COLOR=34
   if (( ! ${+HOST_COLOR} )) typeset -g HOST_COLOR=166
-  if (( ! ${+PWD_COLOR} )) typeset -g PWD_COLOR=118
+  if (( ! ${+PWD_COLOR} )) typeset -g PWD_COLOR=30
   if (( ! ${+BRANCH_COLOR} )) typeset -g BRANCH_COLOR=81
   if (( ! ${+UNINDEXED_COLOR} )) typeset -g UNINDEXED_COLOR=166
   if (( ! ${+INDEXED_COLOR} )) typeset -g INDEXED_COLOR=118
   if (( ! ${+UNTRACKED_COLOR} )) typeset -g UNTRACKED_COLOR=161
 else
-  if (( ! ${+USER_COLOR} )) typeset -g USER_COLOR=magenta
+  if (( ! ${+APPLE_COLOR} )) typeset -g APPLE_COLOR=white
+  if (( ! ${+USER_COLOR} )) typeset -g USER_COLOR=green
   if (( ! ${+HOST_COLOR} )) typeset -g HOST_COLOR=yellow
   if (( ! ${+PWD_COLOR} )) typeset -g PWD_COLOR=green
   if (( ! ${+BRANCH_COLOR} )) typeset -g BRANCH_COLOR=cyan
@@ -23,9 +25,9 @@ else
   if (( ! ${+INDEXED_COLOR} )) typeset -g INDEXED_COLOR=green
   if (( ! ${+UNTRACKED_COLOR} )) typeset -g UNTRACKED_COLOR=red
 fi
-if (( ! ${+UNINDEXED_IND} )) typeset -g UNINDEXED_IND=●
-if (( ! ${+INDEXED_IND} )) typeset -g INDEXED_IND=●
-if (( ! ${+UNTRACKED_IND} )) typeset -g UNTRACKED_IND=●
+if (( ! ${+UNINDEXED_IND} )) typeset -g UNINDEXED_IND=" ●"
+if (( ! ${+INDEXED_IND} )) typeset -g INDEXED_IND=" ●"
+if (( ! ${+UNTRACKED_IND} )) typeset -g UNTRACKED_IND=" ●"
 typeset -g VIRTUAL_ENV_DISABLE_PROMPT=1
 
 setopt nopromptbang prompt{cr,percent,sp,subst}
@@ -43,12 +45,15 @@ if (( ${+functions[git-info]} )); then
     zstyle ':zim:git-info:stashed' format '%F{${STASHED_COLOR}}${STASHED_IND}'
   fi
   zstyle ':zim:git-info:keys' format \
-      'prompt' ' (%F{${BRANCH_COLOR}}%b%c%I%i%u%f%S%f)%s'
+      'prompt' ' [%F{${BRANCH_COLOR}}%b%c%I%i%u%f%S%f]%s'
 
   autoload -Uz add-zsh-hook && add-zsh-hook precmd git-info
 fi
 
-PS1='
-%F{${USER_COLOR}}%n%f at %F{${HOST_COLOR}}%m%f in %F{${PWD_COLOR}}%~%f${(e)git_info[prompt]}${VIRTUAL_ENV:+" (%F{blue}${VIRTUAL_ENV:t}%f)"}
-%(!.#.$) '
+#1 PS1='
+#1 %F{${USER_COLOR}}%n%f at %F{${HOST_COLOR}}%m%f in %F{${PWD_COLOR}}%~%f${(e)git_info[prompt]}${VIRTUAL_ENV:+" (%F{blue}${VIRTUAL_ENV:t}%f)"}
+#1 %(!.#.$) '
+PS1='%F{${APPLE_COLOR}}%f %F{${USER_COLOR}}%n%f@%F{${HOST_COLOR}}%m%f %F{${PWD_COLOR}}%~%f${(e)git_info[prompt]}${VIRTUAL_ENV:+" (%F{green}${VIRTUAL_ENV:t}%f)"}
+%(?:%F{red}❯%F{yellow}❯%F{green}❯:%F{red}✗✗✗)%f '
 unset RPS1
+
