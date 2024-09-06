@@ -7,7 +7,7 @@
 
 # use extended color palette if available
 if (( terminfo[colors] >= 256 )); then
-  if (( ! ${+APPLE_COLOR} )) typeset -g APPLE_COLOR=15
+  if (( ! ${+APPLE_COLOR} )) typeset -g APPLE_COLOR=0
   if (( ! ${+USER_COLOR} )) typeset -g USER_COLOR=34
   if (( ! ${+HOST_COLOR} )) typeset -g HOST_COLOR=166
   if (( ! ${+PWD_COLOR} )) typeset -g PWD_COLOR=30
@@ -16,7 +16,7 @@ if (( terminfo[colors] >= 256 )); then
   if (( ! ${+INDEXED_COLOR} )) typeset -g INDEXED_COLOR=118
   if (( ! ${+UNTRACKED_COLOR} )) typeset -g UNTRACKED_COLOR=161
 else
-  if (( ! ${+APPLE_COLOR} )) typeset -g APPLE_COLOR=white
+  if (( ! ${+APPLE_COLOR} )) typeset -g APPLE_COLOR=black
   if (( ! ${+USER_COLOR} )) typeset -g USER_COLOR=green
   if (( ! ${+HOST_COLOR} )) typeset -g HOST_COLOR=yellow
   if (( ! ${+PWD_COLOR} )) typeset -g PWD_COLOR=green
@@ -54,6 +54,6 @@ fi
 #1 %F{${USER_COLOR}}%n%f at %F{${HOST_COLOR}}%m%f in %F{${PWD_COLOR}}%~%f${(e)git_info[prompt]}${VIRTUAL_ENV:+" (%F{blue}${VIRTUAL_ENV:t}%f)"}
 #1 %(!.#.$) '
 PS1='%F{${APPLE_COLOR}}%f %F{${USER_COLOR}}%n%f@%F{${HOST_COLOR}}%m%f 🛰️ %F{${PWD_COLOR}}%~%f${(e)git_info[prompt]}${VIRTUAL_ENV:+" (%F{green}${VIRTUAL_ENV:t}%f)"}
-%(?:%F{red}❯%F{yellow}❯%F{green}❯:%F{red}✗✗✗)%f '
+%(?:%F{red}❯%F{yellow}❯%F{${USER_COLOR}}❯:%F{red}✗✗✗)%f '
 unset RPS1
 
