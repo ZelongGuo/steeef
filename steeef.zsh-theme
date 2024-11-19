@@ -53,7 +53,8 @@ fi
 #1 PS1='
 #1 %F{${USER_COLOR}}%n%f at %F{${HOST_COLOR}}%m%f in %F{${PWD_COLOR}}%~%f${(e)git_info[prompt]}${VIRTUAL_ENV:+" (%F{blue}${VIRTUAL_ENV:t}%f)"}
 #1 %(!.#.$) '
-PS1='%F{${APPLE_COLOR}}%f %F{${USER_COLOR}}%n%f@%F{${HOST_COLOR}}%m%f 🛰️ %F{${PWD_COLOR}}%~%f${(e)git_info[prompt]}${VIRTUAL_ENV:+" (%F{green}${VIRTUAL_ENV:t}%f)"}
+# 󰑱  🛰️  check nertfont out for more
+PS1='%F{${APPLE_COLOR}}%f %F{${USER_COLOR}}%n%f@%F{${HOST_COLOR}}%m%f 󰑱 %F{${PWD_COLOR}}%~%f${(e)git_info[prompt]}${VIRTUAL_ENV:+" (%F{green}${VIRTUAL_ENV:t}%f)"}
 %(?:%F{red}❯%F{yellow}❯%F{${USER_COLOR}}❯:%F{red}✗✗✗)%f '
 unset RPS1
 
